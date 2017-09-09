@@ -1,6 +1,6 @@
 # mywebsite
 
-> A Vue.js project
+> inner
 
 ## Build Setup
 
