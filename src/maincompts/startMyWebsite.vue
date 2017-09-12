@@ -1,29 +1,28 @@
 <template>
   <div class="startBackGround">
-    <img src="../assets/images/city.jpg" alt="图片被汪涵拉倒火星开会去了！" class="backGroundImg">  
+    <img src="../assets/images/city.jpg" alt="当你看不到图片时能看到我的心情。是的，我喜欢你！" class="backGroundImg">  
     <h1>我是叶忠澈</h1>
     <div class="starGo">
       <can-star></can-star>
-    </div>
-    <div class="connectMe">撩我</div>  
+    </div>  
+    <div class="connectMe">撩我</div> 
+    <div class="downArrow"></div> 
   </div>
   
 </template>
 
 <script>
 import canStar from '../littlecompts/canStar.vue'
-import test1010 from '../littlecompts/test1010.vue'
 export default {
   name: 'startMyWebsite',
   components: {
-    canStar,
-    test1010
+    canStar
   }
 }
 
 </script>
 
-<style>
+<style scoped>
   .startBackGround{
     position: absolute;
     width: 100%;
@@ -62,5 +61,17 @@ export default {
     top: 80%;
     left: 50%;
     margin-left: -25px;
+  }
+  .downArrow{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 88%;
+    left: 50%;
+    margin-left: -15px;
+    border-bottom: 2px solid rgba(255,254,253,0.9);
+    border-right: 2px solid rgba(255,254,253,0.9);
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
   }
 </style>
