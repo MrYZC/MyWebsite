@@ -1,6 +1,6 @@
 <template>
   <div>
-    <start-my-website></start-my-website>
+    <!-- <start-my-website></start-my-website> -->
     <my-life></my-life>
     <my-blog></my-blog>
     <my-footer></my-footer>

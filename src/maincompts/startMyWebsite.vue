@@ -1,11 +1,11 @@
 <template>
   <div class="startBackGround">
     <img src="../assets/images/city.jpg" alt="当你看不到图片时能看到我的心情。是的，我喜欢你！" class="backGroundImg">  
-    <h1>我是叶忠澈</h1>
+    <h1>{{WhoIAm}}</h1>
     <div class="starGo">
       <can-star></can-star>
     </div>  
-    <div class="connectMe">撩我</div> 
+    <div class="connectMe">{{connectMe}}</div> 
     <div class="downArrow"></div> 
   </div>
   
@@ -15,6 +15,12 @@
 import canStar from '../littlecompts/canStar.vue'
 export default {
   name: 'startMyWebsite',
+  data () {
+    return {
+      WhoIAm: '我是叶忠澈',
+      connectMe: '撩我'
+    }
+  },
   components: {
     canStar
   }
