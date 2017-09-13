@@ -7,7 +7,7 @@
       </div>
       <div class="warpperHover">
         <li class="dropBitItem" v-for="(item,index) in dropBitItem">
-          <img :src="item.imgUrl" class="dB" alt="......">
+          <img :src="item.imgUrl" @click.stop="warpperEnter" class="dB" :class="{ active: isActive }" alt="瞄^^">
         </li>
       </div>
     </div>
@@ -45,6 +45,7 @@ export default {
       turnPoint: '巨变',
       chaos: '祛熵',
       interest: '志趣',
+      isActive: false,
       dropBitItem: [
         {
           imgUrl: require('../assets/images/dropbit/db0.jpg')
@@ -104,6 +105,11 @@ export default {
       document.body.clientWidth
     this.$refs.lifeWarpper.style.height = h + 'px'
     this.$refs.lifeWarpper.style.width = w + 'px'
+  },
+  methods: {
+    warpperEnter () {
+      this.isActive = true
+    }
   }
 }
 </script>
@@ -145,7 +151,13 @@ export default {
   .dropBitItem>.dB{
     width: 100%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0;
+  }
+  .dropBitItem>.dB:hover{
+    width: 100%;
+    height: 100%;
+    border-radius: 100px;
+    opacity: 0.9; 
   }
   .bigStory{
     display: flex;
