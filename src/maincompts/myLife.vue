@@ -8,6 +8,7 @@
       <div class="warpperHover">
         <li class="dropBitItem" v-for="(item,index) in dropBitItem">
           <img :src="item.imgUrl" @click.stop="warpperEnter" class="dB" :class="{ active: isActive }" alt="瞄^^">
+          <span>小猫咪</span>
         </li>
       </div>
     </div>
@@ -146,12 +147,17 @@ export default {
     list-style-type: none;
     border: 1px solid #000;
     border-radius: 10px;
-    z-index: 100;
+    position: relative;
   }
   .dropBitItem>.dB{
     width: 100%;
     height: 100%;
     opacity: 0;
+  }
+  .dropBitItem>span{
+    position: absolute;
+    top: 20px;
+    left: 10px;
   }
   .dropBitItem>.dB:hover{
     width: 100%;
