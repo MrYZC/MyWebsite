@@ -7,8 +7,8 @@
       </div>
       <div class="warpperHover">
         <li class="dropBitItem" v-for="(item,index) in dropBitItem">
-          <img :src="item.imgUrl" @click.stop="warpperEnter" class="dB" :class="{ active: isActive }" alt="瞄^^">
-          <span>小猫咪</span>
+          <img :src="item.imgUrl" @mouseenter.stop="warpperEnter" @mouseleave.stop="warpperLeave" class="dB" :class="{ active: isActive }" alt="瞄^^">
+          <span v-if="display">hello world!</span>
         </li>
       </div>
     </div>
@@ -17,21 +17,31 @@
         <h2>{{turnPoint}}</h2>
         <span></span>
       </div>
-      <img class="bigStoryItem" v-for="(item,index) in bigStoryItem">
-    </div>
-		<div class="messy">
-      <div class="messyHeader">
-        <h2>{{chaos}}</h2>
-        <span></span>
+      <div class="warpperHover">
+        <li class="bigStoryItem" v-for="(item,index) in bigStoryItem">
+          <img :src="item.imgUrl" class="bSI">
+          <span>hello world!</span>
+        </li>
       </div>
-      <img class="messyItem" v-for="(item,index) in messyItem" >     
     </div>
     <div class="interest">
       <div class="interestHeader">
           <h2>{{interest}}</h2>
           <span></span>
       </div>
-      <img class="interestItem">
+      <div class="warpperHover">
+        <li class="interestItem" v-for="(item,index) in bigStoryItem">
+          <img :src="item.imgUrl" class="iI">
+          <span>hello world!</span>
+        </li>
+      </div>
+    </div>
+    <div class="messy">
+      <div class="messyHeader">
+        <h2>{{chaos}}</h2>
+        <span></span>
+      </div>
+      <img class="messyItem" v-for="(item,index) in messyItem" >     
     </div>
 	</div>
 </template>
@@ -47,6 +57,7 @@ export default {
       chaos: '祛熵',
       interest: '志趣',
       isActive: false,
+      display: true,
       dropBitItem: [
         {
           imgUrl: require('../assets/images/dropbit/db0.jpg')
@@ -66,36 +77,53 @@ export default {
       ],
       bigStoryItem: [
         {
-          imgUrl: 'R'
+          imgUrl: require('../assets/images/dropbit/db0.jpg')
         },
         {
-          imgUrl: 'C'
+          imgUrl: require('../assets/images/dropbit/db1.jpg')
         },
         {
-          imgUrl: 'G'
+          imgUrl: require('../assets/images/dropbit/db2.jpg')
         },
         {
-          imgUrl: 'N'
+          imgUrl: require('../assets/images/dropbit/db3.jpg')
         },
         {
-          imgUrl: 'B'
+          imgUrl: require('../assets/images/dropbit/db4.jpg')
+        }
+      ],
+      interestItem: [
+        {
+          imgUrl: require('../assets/images/dropbit/db0.jpg')
+        },
+        {
+          imgUrl: require('../assets/images/dropbit/db1.jpg')
+        },
+        {
+          imgUrl: require('../assets/images/dropbit/db2.jpg')
+        },
+        {
+          imgUrl: require('../assets/images/dropbit/db3.jpg')
+        },
+        {
+          imgUrl: require('../assets/images/dropbit/db4.jpg')
         }
       ],
       messyItem: [
         {
-          imgUrl: 'R'
+          imgUrl: require('../assets/images/dropbit/db0.jpg')
         },
         {
-          imgUrl: 'C'
+          imgUrl: require('../assets/images/dropbit/db1.jpg')
         },
         {
-          imgUrl: 'G'
+          imgUrl: require('../assets/images/dropbit/db2.jpg')
         },
         {
-          imgUrl: 'N'
+          imgUrl: require('../assets/images/dropbit/db3.jpg')
         },
         {
-          imgUrl: 'B'
+          imgUrl: require('../assets/images/dropbit/db4.jpg')
         }
       ]
     }
@@ -109,25 +137,32 @@ export default {
   },
   methods: {
     warpperEnter () {
-      this.isActive = true
+      this.display = false
+    },
+    warpperLeave () {
+      this.display = true
     }
   }
 }
 </script>
 
 <style>
-  .dropBit{
+  .dropBit,
+  .bigStroy,
+  .interest
+  {
     display: flex;
     width: 100%;
     height: 25%;
-    background-color: rgb(251,244,230);
   }
   .warpperHover{
     display: flex;
     width: 100%;
     height: 100%;
   }
-  .dropBitHeader{
+  .dropBitHeader,
+  .bigStoryHeader,
+  .interestHeader{
     flex: 0 0 200px;
     border:1px solid #000;
     font-size: 24px;
@@ -140,7 +175,9 @@ export default {
     color: #BF1;
     margin-top: 20px;
   }
-  .dropBitItem{
+  .dropBitItem,
+  .bigStoryItem,
+  .interestItem{
     width: 100%;
     height: 100%;
     flex: auto;
@@ -154,7 +191,15 @@ export default {
     height: 100%;
     opacity: 0;
   }
-  .dropBitItem>span{
+  .bigStoryItem>.bSI,
+  .interestItem>.iI{
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
+  }
+  .dropBitItem>span,
+  .bigStoryItem>span,
+  .interestItem>span{
     position: absolute;
     top: 20px;
     left: 10px;
@@ -164,6 +209,7 @@ export default {
     height: 100%;
     border-radius: 100px;
     opacity: 0.9; 
+    font-size: 0;
   }
   .bigStory{
     display: flex;
@@ -171,11 +217,14 @@ export default {
     height: 25%;
     background-color: #F00;
   }
-  .bigStoryHeader{
-
-  }
   .bigStoryItem{
-
+    width: 100%;
+    height: 100%;
+    flex: auto;
+    list-style-type: none;
+    border: 1px solid #000;
+    border-radius: 10px;
+    position: relative;
   }
   .messy{
     display: flex;
@@ -188,10 +237,5 @@ export default {
   }
   .messyItem{
 
-  }
-  .interest{
-    display: flex;
-    width: 100%; 
-    height: 25%;
   }
 </style>
