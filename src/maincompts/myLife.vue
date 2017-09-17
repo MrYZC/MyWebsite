@@ -7,8 +7,8 @@
       </div>
       <div class="warpperHover">
         <li class="dropBitItem" v-for="(item,index) in dropBitItem">
-          <img :src="item.imgUrl" @mouseenter.stop="warpperEnter" @mouseleave.stop="warpperLeave" class="dB" :class="{ active: isActive }" alt="瞄^^">
-          <span v-if="display">{{ item.info }}</span>
+          <img :src="item.imgUrl" class="dB" :class="{ active: isActive }" alt="瞄^^">
+          <span>{{ item.info }}</span>
         </li>
       </div>
     </div>
@@ -18,8 +18,8 @@
         <span> {{bitLowInf}} </span>
       </div>
       <div class="warpperHover">
-        <li class="bigStoryItem" v-for="(item,index) in bigStoryItem">
-          <img :src="item.imgUrl" class="bSI">
+        <li class="bigStoryItem" v-for="(item,index) in bigStoryItem" >
+          <img :src="item.imgUrl" class="bSI" :class="{ active:isActive }" alt="瞄^^">
           <span>{{ item.info }}</span>
         </li>
       </div>
@@ -37,11 +37,14 @@
       </div>
     </div>
     <div class="messy">
-      <div class="messyHeader">
-        <h2>{{chaos}}</h2>
-        <span>{{bitLowInf}}</span>
+      <div class="toLast">
+        <span class="iconLast"></span>
+        <span class="toLastFont">{{timesMea}}</span>
       </div>
-      <img class="messyItem" v-for="(item,index) in messyItem" >     
+      <div class="toNext">
+        <span class="toNext">{{gateWay}}</span>
+        <span class="iconNextFont"></span> 
+      </div> 
     </div>
 	</div>
 </template>
@@ -54,10 +57,10 @@ export default {
       bitLow: '点滴',
       bitLowInf: '润物细无声',
       turnPoint: '巨变',
-      chaos: '祛熵',
       interest: '志趣',
+      timesMea: '时光机',
+      gateWay: '传送门',
       isActive: false,
-      display: true,
       dropBitItem: [
         {
           imgUrl: require('../assets/images/dropbit/db0.jpg'),
@@ -156,29 +159,20 @@ export default {
     this.$refs.lifeWarpper.style.width = w + 'px'
   },
   methods: {
-    warpperEnter () {
-      this.display = false
-    },
-    warpperLeave () {
-      this.display = true
-    }
   }
 }
+
 </script>
 
-<style>
+<style scoped>
   .dropBit,
-  .bigStroy,
-  .interest
+  .bigStory,
+  .interest,
+  .messy
   {
     display: flex;
     width: 100%;
     height: 25%;
-  }
-  .warpperHover{
-    display: flex;
-    width: 100%;
-    height: 100%;
   }
   .dropBitHeader,
   .bigStoryHeader,
@@ -188,12 +182,22 @@ export default {
     font-size: 24px;
     text-align: center;
   }
-  .dropBitHeader>h2{
+  .dropBitHeader>h2,
+  .bigStoryHeader>h2,
+  .interestHeader>h2{
     margin-top: 30px;
   }
-  .dropBitHeader>span{
+  .dropBitHeader>span,
+  .bigStoryHeader>span,
+  .interestHeader>span{
     color: #BF1;
     margin-top: 20px;
+  }
+  .warpperHover
+  {
+    display: flex;
+    width: 100%;
+    height: 100%;
   }
   .dropBitItem,
   .bigStoryItem,
@@ -206,16 +210,12 @@ export default {
     border-radius: 10px;
     position: relative;
   }
-  .dropBitItem>.dB{
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-  }
+  .dropBitItem>.dB,
   .bigStoryItem>.bSI,
   .interestItem>.iI{
     width: 100%;
     height: 100%;
-    opacity: 0.9;
+    opacity: 0;
   }
   .dropBitItem>span,
   .bigStoryItem>span,
@@ -224,38 +224,31 @@ export default {
     top: 20px;
     left: 10px;
   }
-  .dropBitItem>.dB:hover{
+  .dropBitItem>.dB:hover,
+  .bigStoryItem>.bSI:hover,
+  .interestItem>.iI:hover{
     width: 100%;
     height: 100%;
     border-radius: 100px;
     opacity: 0.9; 
+  }
+  .dropBitItem>.dB:hover + span,
+  .bigStoryItem>.bSI:hover + span,
+  .interestItem>.iI:hover + span{
     font-size: 0;
-  }
-  .bigStory{
-    display: flex;
-    width: 100%;
-    height: 25%;
-    background-color: #F00;
-  }
-  .bigStoryItem{
-    width: 100%;
-    height: 100%;
-    flex: auto;
-    list-style-type: none;
-    border: 1px solid #000;
-    border-radius: 10px;
-    position: relative;
   }
   .messy{
     display: flex;
-    width: 100%; 
-    height: 25%;
-    background-color: #0F0;
+    align-items: center;
   }
-  .messyHeader{
-
+  .messy>.toLast{
+    flex: auto; 
+    text-align: center;
+    font-size: 24px;
   }
-  .messyItem{
-
+  .messy>.toNext{
+    flex: auto;
+    text-align: center;
+    font-size: 24px;
   }
 </style>
