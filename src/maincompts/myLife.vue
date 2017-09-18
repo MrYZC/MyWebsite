@@ -38,12 +38,12 @@
     </div>
     <div class="messy">
       <div class="toLast">
-        <span class="iconLast"></span>
+        <div class="iconLast"></div>
         <span class="toLastFont">{{timesMea}}</span>
       </div>
       <div class="toNext">
-        <span class="toNext">{{gateWay}}</span>
-        <span class="iconNextFont"></span> 
+        <span class="toNextFont">{{gateWay}}</span>
+        <div class="iconNext"></div> 
       </div> 
     </div>
 	</div>
@@ -250,5 +250,25 @@ export default {
     flex: auto;
     text-align: center;
     font-size: 24px;
+  }
+  .iconLast{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-left: 1px solid #495060;
+    border-bottom: 1px solid #495060;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -moz-border: rotate(45deg);
+  }
+  .iconNext{
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-left: 1px solid #495060;
+    border-bottom: 1px solid #495060;
+    transform: rotate(225deg);
+    -webkit-transform: rotate(225deg);
+    -moz-border: rotate(225deg);
   }
 </style>
