@@ -11,11 +11,12 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
-    "iview": "^2.2.0",
+    "iview": "^2.3.2",
     "leaflet": "^1.2.0",
     "leaflet.markercluster": "^1.1.0",
     "mapbox-gl": "^0.39.1",
     "vue": "^2.4.2",
+    "vue-amap": "^0.3.1",
     "vue-router": "^2.7.0"
   },
   "devDependencies": {

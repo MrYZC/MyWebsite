@@ -21,9 +21,9 @@
   		<div class="tail">
   		  <div class="hot_essay">
           <h3>热门TOP10</h3>
-          <ol>
+          <div class="comm_to_read">
             <li class="list_essay" v-for="listEssay in listEssays">{{ listEssay.index}}. {{listEssay.essayHeader}}</li>  
-          </ol>
+          </div>
         </div>
         <div class="goHome"></div>
   		</div>
@@ -170,8 +170,12 @@ export default {
   .essay_content{
 
   }
+  .tail{
+    background-color: #DEEBF7;
+  }
   .list_essay{
     display: inline-block;
+    font-weight: bolder;
     padding: 10px;
   }
 </style>
