@@ -89,4 +89,26 @@ HTTPS的握手过程
 1.浏览器将自己支持的一套加密规则发送给服务器
 2.服务器从选中的一组加密算法与HASH算法，并将自己的身份信息以证书的形式发给浏览器。证书里包含了网站地址，加密
 定义方法，用构造器构造对象具有动态上下文
+//一个常见的'webpack'配置文件
+  const webpack = require('webpack');
+  const HtmlwebpackPlugin = require('html-webpack-plugin')
+  const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
+  module.exports = {
+  	entrty: __dirname + "app/main.js",
+  	output: {
+  		path: __dirname + "build"
+  		filename: "bundle-[hash].js"
+  	},
+  	devtool: 'none',
+  	devserver: {
+
+  	},
+  	moudle: {
+
+  	}
+  	plugins: [
+		new webpack.BannerPlugin('版权所有,翻版必究'),
+		new Html
+  	]
+  }

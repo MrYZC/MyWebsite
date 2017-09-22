@@ -1,112 +1,88 @@
 <template>
   <div class="wrapper">
-  	<el-amap 
-    vid="amapDemo"
-    :center="center"
-    :zoom="zoom"
-    class="amap-demo"
-    :events="events">
-  		<el-amap-marker v-for="marker in markers" :position="marker.position">
-  		</el-amap-marker>
-  	</el-amap>
+  	<el-amap
+      vid="amapDemo"  
+      :center="center"
+      :zoom="zoom"  
+      class="amap-demo">
+      <el-amap-marker v-for="marker in markers" :position="marker.position" :events="marker.events"></el-amap-marker>
+      <el-amap-info-window v-for="window in windows" :position="window.position" :visible="window.visible" :content="window.content"></el-amap-info-window>
+    </el-amap>
   </div>
 </template>
 	
 <script>
-import AMap from 'vue-amap'
+// import AMap from 'vue-amap'
 export default {
   data () {
-    let self = this
     return {
-      zoom: 12,
-      center: [121.59996, 31.197646],
+      zoom: 16,
+      center: [114.838325, 30.644583],
+      // center: [113.0448630848, 23.0429354222],
       markers: [],
-      markerRefs: [],
-      events: {
-        init (o) {
-          setTimeout(() => {
-            let cluster = new AMap.MarkCluster(o, self.markerRefs, {
-              gridSize: 80,
-              renderCluserMarker: self._renderCluserMarker
-            })
-            console.log(cluster)
-          }, 1000)
-        }
-      }
-    }
-  },
-  created () {
-    let self = this
-    let markers = []
-    let index = 0
-    let basePosition = [121.59996, 31.197646]
-    while (++index <= 30) {
-      markers.push({
-        position: [basePosition[0] + 0.01 * index, basePosition[1]],
-        content: '<div style="text-align:center; background-color: hsla(180, 100%, 50%, 0.7); height: 24px; width: 24px; border: 1px solid hsl(180, 100%, 40%); border-radius: 12px; box-shadow: hsl(180, 100%, 50%) 0px 0px 1px;"></div>',
-        events: {
-          init (o) {
-            self.markerRefs.push(o)
-          }
-        }
-      })
-    }
-    this.markers = markers
-  },
-  methods: {
-    _renderCluserMarker (context) {
-      const count = this.markers.length
-      let factor = Math.pow(context.count / count, 1 / 18)
-      let div = document.createElement('div')
-      let Hue = 180 - factor * 180
-      let bgColor = 'hsla(' + Hue + ', 100%, 50%, 0.7)'
-      let fontColor = 'hsla(' + Hue + ', 100%, 20%, 1)'
-      let borderColor = 'hsla(' + Hue + ', 100%, 40%, 1)'
-      let shadowColor = 'hsla(' + Hue + ', 100%, 50%, 1)'
-      div.style.backgroundColor = bgColor
-      let size = Math.round(30 + Math.pow(context.count / count, 1 / 5) * 20)
-      div.style.width = div.style.height = size + 'px'
-      div.style.border = 'solid 1px ' + borderColor
-      div.style.borderRadius = size / 2 + 'px'
-      div.style.boxShadow = '0 0 1px' + shadowColor
-      div.innerHTML = context.count
-      div.style.lineHeight = size + 'px'
-      div.style.color = fontColor
-      div.style.fontSize = '14px'
-      div.style.textAlign = 'center'
-      context.marker.setOffset(new AMap.Pixel(-size / 2, -size / 2))
-      context.marker.setContent(div)
+      windows: []
     }
   },
   mounted () {
-    // 姑且N为2
-    // 为地图添加两个人
-    this.markers = [
-      {
-        position: [121.5273285, 31.21515044]
-      },
-      {
-        position: [121.5273286, 31.21515045]
-      }
+    let markers = []
+    let windows = []
+    let locationPoints = [
+      [114.839268, 30.642535], // 出生
+      [114.845939, 30.634475], // 搬迁
+      [114.838325, 30.644554], // 小学
+      [114.741834, 30.612775], // 中学(初中)
+      [114.57162, 30.674589], // 中学(高中)
+      [114.81565, 30.832590], // 复读
+      [114.336702, 29.851102], // 大学
+      [113.0448630848, 23.0429354222] // 佛山罗村工作
     ]
-    // 模拟实时更新位置
-    // 开启一个1s的轮训，每个人的经纬度都自增0.00001
-    const step = 0.00001
-    setInterval(() => {
-      this.markers.forEach((marker) => {
-        marker.position = [marker.position[0] + step, marker.position[1] + step]
+    let self = this
+    let info = [
+      ['1998年搬迁至此生活19年'],
+      ['人生开始的地方'],
+      ['学习还不错'],
+      ['学校有点乱'],
+      ['2009-2011 有些美好的回忆'],
+      ['2011-2012 人生狷介'],
+      ['2012-2016 风景旧曾谙'],
+      ['2016-2017 RCG佛山锐诚云智能照明']
+    ]
+    for (let point = 0; point < locationPoints.length; point++) {
+      markers.push({
+        position: locationPoints[point],
+        events: {
+          click () {
+            self.windows.forEach(window => {
+              window.visible = false
+            })
+
+            self.$nextTick(() => {
+              self.windows[point].visible = true
+            })
+          }
+        }
       })
-    }, 1000)
+      windows.push({
+        position: locationPoints[point],
+        content: `<div class="prompt">${info[point]}</div>`,
+        visible: false
+      })
+    }
+    this.markers = markers
+    this.windows = windows
   }
 }
 </script>
 <style scoped>
-  .wrapper{
+  .amap-demo{
     position: absolute;
     width: 100%;
     height: 100%;
   }
-	#amapDemo{
-		
-	}
+  .prompt{
+    background: white;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+  }
 </style>

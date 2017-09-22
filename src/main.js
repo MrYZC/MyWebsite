@@ -13,7 +13,7 @@ Vue.use(AMap)
 
 AMap.initAMapApiLoader({
   key: '8be5542f899001703e51d3ee9f4ceb99',
-  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor']
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor', 'AMap.MarkerClusterer']
 })
 /* eslint-disable no-new */
 new Vue({
