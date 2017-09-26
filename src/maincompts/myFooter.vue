@@ -5,8 +5,8 @@
       :center="center"
       :zoom="zoom"  
       class="amap-demo">
-      <el-amap-marker v-for="marker in markers" :position="marker.position" :events="marker.events"></el-amap-marker>
-      <el-amap-info-window v-for="window in windows" :position="window.position" :visible="window.visible" :content="window.content"></el-amap-info-window>
+      <el-amap-marker v-for="marker in markers" :position="marker.position" :events="marker.events" :key="marker.index"></el-amap-marker>
+      <el-amap-info-window v-for="window in windows" :position="window.position" :visible="window.visible" :content="window.content" :key="window.index"></el-amap-info-window>
     </el-amap>
   </div>
 </template>
@@ -41,10 +41,10 @@ export default {
     let info = [
       ['1998年搬迁至此生活19年'],
       ['人生开始的地方'],
-      ['学习还不错'],
-      ['学校有点乱'],
-      ['2009-2011 有些美好的回忆'],
-      ['2011-2012 人生狷介'],
+      ['(小学) 学习还不错'],
+      ['(初中) 学校有点乱'],
+      ['2009-2011 (高中) 有些美好的回忆'],
+      ['2011-2012 (复读) 人生狷介'],
       ['2012-2016 风景旧曾谙'],
       ['14.7-14.9 暑期工'],
       ['2016-2017 RCG佛山锐诚云智能照明']

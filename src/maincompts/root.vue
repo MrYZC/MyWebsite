@@ -3,7 +3,7 @@
    <!--  <start-my-website></start-my-website> -->
    <!--  <my-life></my-life> -->
     <!-- <my-blog></my-blog> -->
-    <my-footer></my-footer>
+   <!--  <my-footer></my-footer> -->
     <my-relation-ship></my-relation-ship>
     <call-me></call-me> 
   </div>
@@ -14,7 +14,7 @@ import startMyWebsite from './startMyWebsite.vue'
 import myLife from './myLife.vue'
 import myBlog from './myBlog.vue'
 import myFooter from './myFooter.vue'
-import myRelationship from './myRelationship.vue'
+import myRelationShip from './myRelationShip.vue'
 import callMe from './callMe.vue'
 
 export default {
@@ -24,7 +24,7 @@ export default {
     myLife,
     myBlog,
     myFooter,
-    myRelationship,
+    myRelationShip,
     callMe
   }
 }
